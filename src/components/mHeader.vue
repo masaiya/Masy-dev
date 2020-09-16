@@ -3,7 +3,7 @@
     <div class="title">Masy —— some examples</div>
     <ul class="nav">
       <li class="gitNav">
-        <a href="javascript:;">Git</a>
+        <a href="https://github.com/masaiya/Masy-dev" target="_blank">Git</a>
       </li>
       <li class="docNav">
         参考文档

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <m-header></m-header>
-    <m-side class="side"></m-side>
+    <m-side class="side" :data="navsData[lang]"></m-side>
     <div id="main">
       <router-view></router-view>
     </div>
@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import navsData from "./nav.config.json"
+
 import mHeader from "./components/mHeader"
 import mSide from "./components/mSide"
 
@@ -17,6 +19,12 @@ export default {
   components: {
     mHeader,
     mSide
+  },
+  data() {
+    return {
+      lang: 'zh-CN',
+      navsData
+    }
   }
 }
 </script>

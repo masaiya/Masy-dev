@@ -1,11 +1,11 @@
 <template>
   <div id="side">
      <ul>
-       <li class="nav-item" v-for="(item, index) in items" :key="index">
+       <li class="nav-item" v-for="(item, index) in data" :key="index">
          <a v-if="!item.path" class="sum-item">{{item.name}}</a>
          <ul class="sub-nav">
            <li v-for="(item1, index1) in item.children" :key="index1">
-             <router-link :to="item1.path" class="sub-item">{{item1.name}}
+             <router-link :to="item1.path" class="sub-item" active-class="active">{{item1.name}}
              </router-link>
            </li>
          </ul>
@@ -19,31 +19,13 @@ export default {
   name: 'side',
   data() {
     return {
-      items: [
-        {
-          "name": "小栗子",
-          "children": [
-            {
-              "path": "/todoMvc",
-              "name": "todoMvc"
-            }
-          ]
-        },
-        {
-          "name": "组件",
-          "children": [
-            {
-              "path": "/dialog",
-              "name": "弹窗"
-            },
-            {
-              "path": "/button",
-              "name": "按钮"
-            }
-          ]
-        }
-      ]
     };
+  },
+  props: {
+    data: {
+      type: Array,
+      default: []
+    }
   },
   computed:{
   },
@@ -87,5 +69,8 @@ a {
   line-height: 40px;
   height: 40px;
   font-weight: 400;
+}
+.active {
+  color: #409EFF;
 }
 </style>
