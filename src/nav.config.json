@@ -1,0 +1,26 @@
+{
+  "zh-CN": [
+    {
+      "name": "小栗子",
+      "children": [
+        {
+          "path": "/todoMvc",
+          "name": "todoMvc"
+        }
+      ]
+    },
+    {
+      "name": "组件",
+      "children": [
+        {
+          "path": "/dialog",
+          "name": "弹窗"
+        },
+        {
+          "path": "/button",
+          "name": "按钮"
+        }
+      ]
+    }
+  ]
+}
