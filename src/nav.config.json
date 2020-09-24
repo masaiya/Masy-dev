@@ -17,8 +17,8 @@
           "name": "弹窗"
         },
         {
-          "path": "/button",
-          "name": "按钮"
+          "path": "/dropDown",
+          "name": "下拉"
         }
       ]
     }

@@ -14,6 +14,8 @@ import navsData from "./nav.config.json"
 import mHeader from "./components/mHeader"
 import mSide from "./components/mSide"
 
+
+
 export default {
   name: 'App',
   components: {
@@ -44,10 +46,8 @@ html, body {
 .side {
   float: left;
 }
-#main {
-  float: left; 
+#main { 
   padding: 50px 0;
-  width: 940px;
-  margin-left: 20px;
+  margin-left: 240px;
 }
 </style>
