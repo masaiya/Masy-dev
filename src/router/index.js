@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
+
 import todoMvc from "../components/examples/todoMvc.vue";
-import mDialog from "../components/subGroup/mDialog.vue";
 import mDropDown from "../components/subGroup/mDropDown.vue";
+
+import markdown from "../docsConfig"
 
 export default new Router({
   routes: [
@@ -20,12 +22,12 @@ export default new Router({
     {
       path: '/dialog',
       name: 'dialog',
-      component: mDialog
+      component: markdown.mdDialog
     },
     {
       path: '/dropDown',
       name: 'dropDown',
-      component: mDropDown
+      component: markdown.mdDropDown
     }
   ]
 })

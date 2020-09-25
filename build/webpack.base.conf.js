@@ -111,69 +111,73 @@ module.exports = {
       },
       {
         test: /\.md$/,
-        loader: 'vue-markdown-loader',
-        options: {
-          use: [
-            [require('markdown-it-anchor'), {
-              level: 1, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
-              slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
-              permalink: false, // 开启标题锚点功能
-              permalinkBefore: false // 在标题前创建锚点
-            }],
-            // 'markdown-it-container'的作用是自定义代码块
-
-            [require('markdown-it-container'), 'demo', {
-              // 当我们写::: demo :::这样的语法时才会进入自定义渲染方法
-              validate: function(params) {
-                return params.trim().match(/^demo\s*(.*)$/);
-              },
-             // 自定义渲染方法,这里为核心代码
-              render: function(tokens, idx) {
-                var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
-                // nesting === 1表示标签开始
-                if (tokens[idx].nesting === 1) {
-                  // 获取正则捕获组中的描述内容,即::: demo xxx中的xxx
-                  var description = (m && m.length > 1) ? m[1] : '';
-                  // 获得内容
-                  var content = tokens[idx + 1].content;
-                  // 解析过滤解码生成html字符串
-                  var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
-                  // 获取script中的内容
-                  var script = striptags.fetch(content, 'script');
-                  // 获取style中的内容
-                  var style = striptags.fetch(content, 'style');
-                  // 组合成prop参数,准备传入组件
-                  var jsfiddle = { html: html, script: script, style: style };
-                  // 是否有描述需要渲染
-                  var descriptionHTML = description
-                    ? md.render(description)
-                    : '';
-                  // 将jsfiddle对象转换为字符串,并将特殊字符转为转义序列
-                  jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
-                  // 起始标签,写入demo-block模板开头,并传入参数
-                  return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
-                            <div class="source" slot="source">${html}</div>
-                            ${descriptionHTML}
-                            <div class="highlight" slot="highlight">`;
+        use: [
+          {loader: 'html-loader'},
+          {loader: 'markdown-loader',
+           options: {
+            use: [
+              [require('markdown-it-anchor'), {
+                level: 1, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
+                slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
+                permalink: false, // 开启标题锚点功能
+                permalinkBefore: false // 在标题前创建锚点
+              }],
+              // 'markdown-it-container'的作用是自定义代码块
+  
+              [require('markdown-it-container'), 'demo', {
+                // 当我们写::: demo :::这样的语法时才会进入自定义渲染方法
+                validate: function(params) {
+                  return params.trim().match(/^demo\s*(.*)$/);
+                },
+               // 自定义渲染方法,这里为核心代码
+                render: function(tokens, idx) {
+                  var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
+                  // nesting === 1表示标签开始
+                  if (tokens[idx].nesting === 1) {
+                    // 获取正则捕获组中的描述内容,即::: demo xxx中的xxx
+                    var description = (m && m.length > 1) ? m[1] : '';
+                    // 获得内容
+                    var content = tokens[idx + 1].content;
+                    // 解析过滤解码生成html字符串
+                    var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
+                    // 获取script中的内容
+                    var script = striptags.fetch(content, 'script');
+                    // 获取style中的内容
+                    var style = striptags.fetch(content, 'style');
+                    // 组合成prop参数,准备传入组件
+                    var jsfiddle = { html: html, script: script, style: style };
+                    // 是否有描述需要渲染
+                    var descriptionHTML = description
+                      ? md.render(description)
+                      : '';
+                    // 将jsfiddle对象转换为字符串,并将特殊字符转为转义序列
+                    jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
+                    // 起始标签,写入demo-block模板开头,并传入参数
+                    return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
+                              <div class="source" slot="source">${html}</div>
+                              ${descriptionHTML}
+                              <div class="highlight" slot="highlight">`;
+                  }
+                  // 否则闭合标签
+                  return '</div></demo-block>\n';
                 }
-                // 否则闭合标签
-                return '</div></demo-block>\n';
-              }
-            }],
-            [require('markdown-it-container'), 'tip'],
-            [require('markdown-it-container'), 'warning']
-          ],
-          // 定义处理规则
-          preprocess: function(MarkdownIt, source) {
-            // 对于markdown中的table,
-            MarkdownIt.renderer.rules.table_open = function() {
-              return '<table class="table">';
-            };
-            // 对于代码块去除v-pre,添加高亮样式
-            MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
-            return source;
+              }],
+              [require('markdown-it-container'), 'tip'],
+              [require('markdown-it-container'), 'warning']
+            ],
+            // 定义处理规则
+            preprocess: function(MarkdownIt, source) {
+              // 对于markdown中的table,
+              MarkdownIt.renderer.rules.table_open = function() {
+                return '<table class="table">';
+              };
+              // 对于代码块去除v-pre,添加高亮样式
+              MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
+              return source;
+            }
+           }
           }
-        }
+        ]
       }
     ]
   },

@@ -23,7 +23,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 </m-dialog>
 
 <script>
-  import mDialog from "./src/components/subGroup/mDialog.vue"
+  import mDialog from "../../components/subGroup/mDialog.vue"
   export default {
     data() {
       return {
