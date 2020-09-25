@@ -115,10 +115,10 @@ module.exports = {
         options: {
           use: [
             [require('markdown-it-anchor'), {
-              level: 2, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
+              level: 1, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
               slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
-              permalink: true, // 开启标题锚点功能
-              permalinkBefore: true // 在标题前创建锚点
+              permalink: false, // 开启标题锚点功能
+              permalinkBefore: false // 在标题前创建锚点
             }],
             // 'markdown-it-container'的作用是自定义代码块
 

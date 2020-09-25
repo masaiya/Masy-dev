@@ -1,3 +1,18 @@
+body, html {
+  font-family: Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+h1, h2, h3, h4, h5 {
+  font-weight: inherit;
+  color: #1f2f3d;
+}
+p {
+  font-size: 14px;
+  color: #5e6d82;
+  line-height: 1.5em;
+}
 .tip {
   padding: 8px 16px;
   background-color: #ECF8FF;
