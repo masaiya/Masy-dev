@@ -1,7 +1,7 @@
 <template>
   <transition name="dialog-fade">
-    <div class="dialog_wrapper" v-show="visible" @click.self="wrapperClick">
-      <div class="dialog" :style="width">
+    <div class="dialog_wrapper" v-show="visible">
+      <div class="dialog">
         <div class="dialog_header">
           <slot name="header">
             <span class="dialog_title">{{title}}</span>
@@ -34,10 +34,6 @@ export default {
     title: {
       type: String,
       default: ''
-    },
-    width: {
-      type: String,
-      default: '30%'
     }
   },
   computed:{
@@ -45,9 +41,6 @@ export default {
   watch:{
   },
   methods: {
-    wrapperClick() {
-      this.$emit('closePop');
-    }
   },
 };
 </script>
