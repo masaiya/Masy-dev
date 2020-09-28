@@ -33,6 +33,7 @@ export default {
 <style scoped lang="scss">
 .mHeaderWrapper {
   height: 80px;
+  width: 100%;
 }
 .mHeader {
   height: 80px;
@@ -53,7 +54,7 @@ export default {
     float: left;
     font-size: 32px;
     font-weight: normal;
-    line-height: 80px;;
+    line-height: 80px;
   }
   .nav {
     margin-right: 6px;

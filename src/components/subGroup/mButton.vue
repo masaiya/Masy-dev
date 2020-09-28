@@ -1,5 +1,6 @@
 <template>
-  <button class="mButton"
+  <button 
+   @click="handleClick"
    :class="[
    'mButton',
    'mButton-' + type,
@@ -31,7 +32,11 @@ export default {
   },
   watch:{
   },
-  methods: {},
+  methods: {
+      handleClick(evt) {
+        this.$emit('click', evt);
+      }
+    }
 };
 </script>
 

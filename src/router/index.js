@@ -19,6 +19,11 @@ export default new Router({
       component: todoMvc
     },
     {
+      path: '/link',
+      name: 'link',
+      component: markdown.mdLink
+    },
+    {
       path: '/button',
       name: 'button',
       component: markdown.mdButton

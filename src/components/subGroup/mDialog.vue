@@ -53,7 +53,7 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 100000;
 }
 .dialog {
   position: relative;
