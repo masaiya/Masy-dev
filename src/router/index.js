@@ -34,6 +34,11 @@ export default new Router({
       component: markdown.mdDialog
     },
     {
+      path: '/radio',
+      name: 'radio',
+      component: markdown.mdRadio
+    },
+    {
       path: '/dropDown',
       name: 'dropDown',
       component: markdown.mdDropDown

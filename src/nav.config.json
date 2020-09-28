@@ -25,6 +25,10 @@
           "name": "Dialog 弹窗"
         },
         {
+          "path": "/radio",
+          "name": "Radio 单选框"
+        },
+        {
           "path": "/dropDown",
           "name": "DropDown 下拉"
         }
