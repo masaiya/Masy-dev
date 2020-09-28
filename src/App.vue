@@ -38,7 +38,7 @@ html, body {
 }
 #app {
   max-width: 1200px;
-  min-width: 800px;
+  min-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
