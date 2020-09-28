@@ -4,7 +4,6 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import todoMvc from "../components/examples/todoMvc.vue";
-import mDropDown from "../components/subGroup/mDropDown.vue";
 
 import markdown from "../docsConfig"
 
@@ -18,6 +17,11 @@ export default new Router({
       path: '/todoMvc',
       name: 'todoMvc',
       component: todoMvc
+    },
+    {
+      path: '/button',
+      name: 'button',
+      component: markdown.mdButton
     },
     {
       path: '/dialog',

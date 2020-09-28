@@ -13,6 +13,10 @@
       "name": "组件",
       "children": [
         {
+          "path": "/button",
+          "name": "按钮"
+        },
+        {
           "path": "/dialog",
           "name": "弹窗"
         },

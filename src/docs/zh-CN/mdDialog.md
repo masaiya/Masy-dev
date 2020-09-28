@@ -12,9 +12,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 <m-dialog
   title="提示"
-  :visible.sync="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
+  :visible.sync="dialogVisible">
   <span>这是一段信息</span>
   <span slot="footer" class="dialog-footer">
     <button @click="dialogVisible = false">取 消</button>
