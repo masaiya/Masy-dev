@@ -6,6 +6,10 @@
         {
           "path": "/todoMvc",
           "name": "todoMvc"
+        },
+        {
+          "path": "/rotate",
+          "name": "rotate"
         }
       ]
     },
