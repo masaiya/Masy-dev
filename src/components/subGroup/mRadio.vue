@@ -1,7 +1,7 @@
 <template>
   <label class="mRadio" :class="{'is-checked': model === label}"
       role="radio" :aria-checked="model === label">
-    <span class="mRadio-input" :class="{'is-checked': model !== label}">
+    <span class="mRadio-input" :class="{'is-checked': model === label}">
       <span class="mRadio-inner"></span>
       <input type="radio" ref="radio" class="mRadio-original" :value="label" v-model="model">
       <span class="mRadio-label">
@@ -16,17 +16,16 @@
 export default {
   name: 'mRadio',
   props: {
-    label: {}
+    label: {},
+    value: {}
   },
   data() {
     return {
-      value: {}
     };
   },
   computed:{
     model: {
       get() {
-        console.log(this.value);
         return this.value;
       },
       set(val) {

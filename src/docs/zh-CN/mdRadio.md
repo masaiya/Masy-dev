@@ -9,6 +9,7 @@
 ```html
 <m-radio v-model="radio" label="1">备选项1</m-radio>
 <m-radio v-model="radio" label="2">备选项2</m-radio>
+<div>{{radio}}</div>
 <script>
   import mRadio from "../../components/subGroup/mRadio.vue"
   export default {
