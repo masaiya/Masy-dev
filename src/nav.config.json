@@ -29,6 +29,10 @@
           "name": "Radio 单选框"
         },
         {
+          "path": "/input",
+          "name": "Input 输入框"
+        },
+        {
           "path": "/dropDown",
           "name": "DropDown 下拉"
         }

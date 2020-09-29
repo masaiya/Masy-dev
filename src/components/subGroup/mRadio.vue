@@ -1,9 +1,10 @@
 <template>
-  <label class="mRadio" :class="{'is-checked': model === label}"
-      role="radio" :aria-checked="model === label">
-    <span class="mRadio-input" :class="{'is-checked': model === label}">
+  <label class="mRadio" :class="[{'is-checked': model === label},{'is-disabled': disabled}]"
+      role="radio" :aria-checked="model === label"
+      :aria-disabled="disabled">
+    <span class="mRadio-input" :class="[{'is-checked': model === label},{'is-disabled': disabled}]">
       <span class="mRadio-inner"></span>
-      <input type="radio" ref="radio" class="mRadio-original" :value="label" v-model="model">
+      <input type="radio" ref="radio" class="mRadio-original" :value="label" v-model="model" :disabled="disabled">
       <span class="mRadio-label">
         <slot></slot>
         <template v-if="!$slots.default">{{label}}</template>
@@ -17,7 +18,11 @@ export default {
   name: 'mRadio',
   props: {
     label: {},
-    value: {}
+    value: {},
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -36,7 +41,7 @@ export default {
   },
   watch:{
   },
-  methods: {},
+  methods: {}
 };
 </script>
 
@@ -73,13 +78,29 @@ export default {
       top: 50%;
       transform: translate(-50%, -50%);
     }
+    &:hover {
+      border-color: #409EFF;
+    }
   }
   .mRadio-label {
     line-height: 1;
     vertical-align: middle;
   }
 }
-.mRadio.is-checked {
+.mRadio.is-disabled {
+  cursor: not-allowed;
+  border-color: #EBEEF5;
+}
+.mRadio-input.is-disabled .mRadio-inner {
+  background-color: #f5f7fa;
+  border-color: #e4e7ed;
+  cursor: not-allowed;
+}
+.mRadio-input.is-disabled .mRadio-inner::after{
+  background-color: #f5f7fa;
+  cursor: not-allowed;
+}
+.mRadio.is-checked{
   border-color: #409eff;
 }
 .mRadio-input.is-checked .mRadio-inner {
