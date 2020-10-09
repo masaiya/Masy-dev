@@ -9,7 +9,7 @@
         <input type="checkbox" class="toggle-all">
         <label for="toggle-all"></label>
         <ul class="todo-list">
-          <li v-for="todo in todos" :key="todo.id" class="todo">
+          <li v-for="todo in filtersTodo" :key="todo.id" class="todo">
             <div class="view">
               <input type="checkbox" class="toggle" v-model="todo.completed">
               <label @dblclick="editTodo(todo)" :class="[todo.completed ? 'completed': '']">{{todo.title}}</label>
@@ -24,6 +24,18 @@
         <span class="todo-count">
           <strong>{{remaining}}</strong> {{remaining | pluralize}} left
         </span>
+        <ul class="filters">
+          <li>
+            <span @click="toggleTab" :class="{selected: visibility == 'all'}">All</span>
+          </li>
+          <li>
+            <span @click="toggleTab" :class="{selected: visibility == 'active'}">Active</span>
+          </li>
+          <li>
+            <span @click="toggleTab" :class="{selected: visibility == 'completed'}">Completed</span>
+          </li>
+        </ul>
+        <div class="clear" @click="clearCompleted" v-show="todos.length > remaining">Clear completed</div>
       </footer>
     </section>
     <footer class="info">
@@ -42,12 +54,24 @@ export default {
       newTodo: "",
       todos: [],
       editTag: false,
-      editedTodo: null
+      editedTodo: null,
+      visibility: "all",
+      filtersTodo: this.todos
     };
   },
   computed:{
+    active: function() {
+      return this.todos.filter(function(todo) {
+        return !todo.completed;
+      })
+    },
+    completed: function() {
+      return this.todos.filter(function(todo) {
+        return todo.completed;
+      })
+    },
     remaining: function() {
-      
+      return this.active.length;
     }
   },
   filters: {
@@ -56,6 +80,9 @@ export default {
     }
   },
   watch:{
+    todos(newValue) {
+      this.filtersTodo = this.todos;
+    } 
   },
   methods: {
     addTodo: function() {
@@ -91,6 +118,12 @@ export default {
     cancelEdit: function(todo) {
       this.editedTodo = null;
       todo.title = this.beforeEditCache;
+    },
+    clearCompleted: function() {
+      this.todos = this.active;
+    },
+    toggleTab: function() {
+
     }
   }
 };
@@ -242,7 +275,68 @@ export default {
     }
   }
 }
-
+.footer {
+  color: #777;
+  padding: 10px 15px;
+  height: 20px;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+  &:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+	            0 8px 0 -3px #f6f6f6,
+	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
+	            0 16px 0 -6px #f6f6f6,
+	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
+  }
+  .todo-count {
+    float: left;
+    text-align: left;
+    strong {
+      font-weight: 300;
+    }
+  }
+  .clear{
+    float: right;
+    position: relative;
+    color: #777;
+    font-size: 16px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .filters{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    li {
+      display: inline;
+      span {
+        margin: 3px;
+        padding: 3px 7px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        cursor: pointer;
+        &:hover {
+          border-color: rgba(175, 47, 47, 0.1);
+        }
+        &.selected {
+          border-color: rgba(175, 47, 47, 0.2);
+        }
+      }
+    }
+  } 
+}
 .info {
   display: block;
   color: #bfbfbf;
