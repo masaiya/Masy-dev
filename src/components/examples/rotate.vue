@@ -1,5 +1,5 @@
 <template>
-  <div class="rotato">
+  <div class="rotate">
     <div class="wrap">
       <div class="cube">
         <div class="out_front">
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'rotate',
   data() {
     return {
     };
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-.rotato {
+.rotate {
   position: absolute;
   top: 110px;
   left: 200px;
