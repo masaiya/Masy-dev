@@ -6,7 +6,7 @@
         <input type="text" class="todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
       </header>
       <section class="main" v-show="todos.length">
-        <input type="checkbox" class="toggle-all">
+        <input type="checkbox" class="toggle-all" v-model="allDone">
         <label for="toggle-all"></label>
         <ul class="todo-list">
           <li v-for="todo in filtersTodo" :key="todo.id" class="todo">
@@ -15,7 +15,7 @@
               <label @dblclick="editTodo(todo)" :class="[todo.completed ? 'completed': '']">{{todo.title}}</label>
               <div class="destory" @click="removeTodo(todo)">×</div>
             </div>
-            <input type="text" class="edit" :class="{'show': todo.title == editedTodo}" v-model="todo.title" ref="input" @blur="doneEdit(todo)" 
+            <input type="text" class="edit" v-model="editedTodo" ref="input" :class="{'show': todo.title == beforeEditCache}" @blur="doneEdit(todo)" 
             @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)">
           </li>
         </ul>
@@ -26,13 +26,13 @@
         </span>
         <ul class="filters">
           <li>
-            <span @click="toggleTab" :class="{selected: visibility == 'all'}">All</span>
+            <span @click="toggleTabAll" :class="{selected: visibility == 'all'}">All</span>
           </li>
           <li>
-            <span @click="toggleTab" :class="{selected: visibility == 'active'}">Active</span>
+            <span @click="toggleTabActive" :class="{selected: visibility == 'active'}">Active</span>
           </li>
           <li>
-            <span @click="toggleTab" :class="{selected: visibility == 'completed'}">Completed</span>
+            <span @click="toggleTabCom" :class="{selected: visibility == 'completed'}">Completed</span>
           </li>
         </ul>
         <div class="clear" @click="clearCompleted" v-show="todos.length > remaining">Clear completed</div>
@@ -51,6 +51,7 @@ export default {
   name: 'todoMvc',
   data() {
     return {
+      beforeEditCache: null,
       newTodo: "",
       todos: [],
       editTag: false,
@@ -72,6 +73,16 @@ export default {
     },
     remaining: function() {
       return this.active.length;
+    },
+    allDone: {
+      get: function () {
+        return this.remaining === 0;
+      },
+      set: function (value) {
+        this.todos.forEach(function (todo) {
+          todo.completed = value;
+        });
+      }
     }
   },
   filters: {
@@ -85,6 +96,11 @@ export default {
     } 
   },
   methods: {
+    toggleAll: function() {
+      this.todos.forEach(function(todo) {
+        todo.completed = !todo.completed;
+      })
+    },
     addTodo: function() {
       var value = this.newTodo && this.newTodo.trim();
       if(!value) return ;
@@ -99,31 +115,42 @@ export default {
       this.beforeEditCache = todo.title;
       this.editedTodo = todo.title;
       this.$nextTick(() => {
-        this.$refs.input.focus();
+        this.$refs.input[0].focus();
       })
     },
     removeTodo: function(todo) {
       this.todos.splice(this.todos.indexOf(todo), 1);
     },
     doneEdit: function(todo) {
-      if(!this.editedTodo) {
-        return;
+      if(!this.editedTodo){
+        this.removeTodo(todo);
+        this.beforeEditCache = null;
+        return ;
       }
-      this.editedTodo = null;
-      todo.title = todo.title.trim();
-      if (!todo.title) {
+      this.beforeEditCache = null;
+      todo.title = this.editedTodo.trim();
+      if(!todo.title) {
         this.removeTodo(todo);
       }
     },
     cancelEdit: function(todo) {
-      this.editedTodo = null;
       todo.title = this.beforeEditCache;
+      this.beforeEditCache = null;
     },
     clearCompleted: function() {
       this.todos = this.active;
     },
-    toggleTab: function() {
-
+    toggleTabAll: function() {
+      this.filtersTodo = this.todos;
+      this.visibility = 'all';
+    },
+    toggleTabActive: function() {
+      this.filtersTodo = this.active;
+      this.visibility = 'active';
+    },
+    toggleTabCom: function() {
+      this.filtersTodo = this.completed;
+      this.visibility = 'completed';
     }
   }
 };
@@ -265,6 +292,7 @@ export default {
         box-sizing: border-box;
         border: 1px solid #999;
         outline: none;
+        color: #4d4d4d;
       }
       .show {
         display: block;  

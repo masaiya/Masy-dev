@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import todoMvc from "../components/examples/todoMvc.vue";
-import totate from "../components/examples/rotate.vue" 
+import totate from "../components/examples/rotate.vue";
 
 import markdown from "../docsConfig"
 
