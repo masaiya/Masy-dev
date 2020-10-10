@@ -10,6 +10,10 @@
         {
           "path": "/rotate",
           "name": "rotate"
+        },
+        {
+          "path": "/treeView",
+          "name": "树形视图"
         }
       ]
     },
