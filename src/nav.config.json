@@ -12,6 +12,10 @@
           "name": "rotate"
         },
         {
+          "path": "/svgForm",
+          "name": "svgForm"
+        },
+        {
           "path": "/treeView",
           "name": "树形视图"
         }

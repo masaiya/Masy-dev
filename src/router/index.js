@@ -5,7 +5,8 @@ Vue.use(Router)
 
 import todoMvc from "../components/examples/todoMvc.vue";
 import totate from "../components/examples/rotate.vue";
-import treeView from "../components/examples/treeView/treeView.vue"
+import svgForm from "../components/examples/svgForm.vue"
+import treeView from "../components/examples/treeView/treeView.vue";
 
 import markdown from "../docsConfig"
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/rotate',
       name: 'rotate',
       component: totate
+    },
+    {
+      path: '/svgForm',
+      name: 'svgForm',
+      component: svgForm
     },
     {
       path: '/treeView',
