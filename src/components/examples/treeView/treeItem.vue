@@ -34,7 +34,7 @@ export default {
       this.isOpen = !this.isOpen;
     },
     addItem: function() {
-      this.item.children.push({ 'name':'歌手' });
+      this.item.children.push({ 'name':'new Staff' });
     },
     makeFolder: function() {
       if(!this.isFolder) {

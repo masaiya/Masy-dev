@@ -14,21 +14,25 @@ export default {
   data() {
     return {
       treeData: {
-        name: "我的音乐",
+        name: "My Tree",
         children: [
-          { 
-            name: "李建",
+          { name: "hello" },
+          { name: "everyone" },
+          {
+            name: "child folder",
             children: [
-              { name: "父亲写的散文诗", status: 0 }
+              {
+                name: "child folder",
+                children: [{ name: "hello" }, { name: "everyone" }]
+              },
+              { name: "hello" },
+              { name: "everyone" },
+              {
+                name: "child folder",
+                children: [{ name: "hello" }, { name: "everyone" }]
+              }
             ]
-          },
-          { 
-            name: "周杰伦",
-            children: [
-              { name: "发如雪", status: 0 },
-              { name: "青花瓷", status: 0 }
-            ]
-          },
+          }
         ]
       }
     };
@@ -40,7 +44,7 @@ export default {
   methods: {
     makeFolder: function(item) {
       this.$set(item, "children", []);
-      item.children.push( {'name' : '歌名', 'status' : 0})
+      item.children.push( {'name' : 'new Staff'})
     }
   },
   components: {
