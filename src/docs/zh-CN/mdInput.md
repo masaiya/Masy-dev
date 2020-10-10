@@ -10,7 +10,22 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 ### 基础用法
 :::demo
-```
+```html
+<m-input v-model="input" placeholder="请输入内容">
 
+</m-input>
+<script>
+import mInput from "../../components/subGroup/mInput.vue"
+export default {
+  components: {
+    mInput
+  },
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
 ```
 :::

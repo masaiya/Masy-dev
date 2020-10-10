@@ -1,5 +1,6 @@
 <template>
   <div class="mDropDown">
+
   </div>
 </template>
 
@@ -11,7 +12,7 @@ export default {
     };
   },
   components: {
-    info
+    
   },
   computed:{
   },
