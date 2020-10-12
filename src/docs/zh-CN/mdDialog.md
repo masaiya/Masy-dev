@@ -21,17 +21,11 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 </m-dialog>
 
 <script>
-  import mButton from "../../components/subGroup/mButton.vue"
-  import mDialog from "../../components/subGroup/mDialog.vue"
   export default {
     data() {
       return {
         dialogVisible: false
       };
-    },
-    components: {
-      mDialog,
-      mButton
     }
   };
 </script>

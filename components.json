@@ -1,0 +1,8 @@
+{
+  "mButton": "./src/components/subGroup/mButton",
+  "mDialog": "./src/components/subGroup/mDialog",
+  "mDropDown": "./src/components/subGroup/mDropDown",
+  "mInput": "./src/components/subGroup/mInput",
+  "mLink": "./src/components/subGroup/mLink",
+  "mRadio": "./src/components/subGroup/mRadio"
+}

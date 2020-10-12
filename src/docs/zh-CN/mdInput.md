@@ -15,11 +15,7 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 </m-input>
 <script>
-import mInput from "../../components/subGroup/mInput.vue"
 export default {
-  components: {
-    mInput
-  },
   data() {
     return {
       input: ''

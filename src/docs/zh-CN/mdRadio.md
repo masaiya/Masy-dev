@@ -13,15 +13,10 @@
 </div>
 
 <script>
-  import mRadio from "../../components/subGroup/mRadio.vue"
   export default {
-    components: {
-      mRadio
-    },
     data() {
       return {
-        radio: '1',
-        radio1: '1'
+        radio: '1'
       }
     }
   };
@@ -39,11 +34,7 @@
   <m-radio disabled v-model="radio1" label="2">备选项2</m-radio>
 </div>
 <script>
-  import mRadio from "../../components/subGroup/mRadio.vue"
   export default {
-    components: {
-      mRadio
-    },
     data() {
       return {
         radio1: '1'

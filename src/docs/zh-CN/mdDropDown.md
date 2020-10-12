@@ -11,15 +11,11 @@
   
 </m-drop-down>
 <script>
-  import mDropDown from "../../components/subGroup/mDropDown.vue"
   export default {
     data() {
       return {
         
       };
-    },
-    components: {
-      mDropDown
     }
   };
 </script>

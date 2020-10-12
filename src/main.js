@@ -6,14 +6,28 @@ import 'highlight.js/styles/default.css';
 
 import "../src/assets/styles/common.css"
 
+import components from "../components.json";
+
 Vue.config.productionTip = false
 
 import demoBlock from "./components/demo-block"
 
+import mButton from "./components/subGroup/mButton.vue"
+Vue.component('mButton', mButton);
+import mRadio from "./components/subGroup/mRadio.vue"
+Vue.component('mRadio', mRadio);
+import mDialog from "./components/subGroup/mDialog.vue"
+Vue.component('mDialog', mDialog);
+import mInput from "./components/subGroup/mInput.vue"
+Vue.component('mInput', mInput);
+import mLink from "./components/subGroup/mLink.vue"
+Vue.component('mLink', mLink);
+import mDropDown from "./components/subGroup/mDropDown.vue"
+Vue.component('mDropDown', mDropDown);
+
 Vue.component('demo-block', demoBlock);
 
 router.afterEach(route => {
-  // https://github.com/highlightjs/highlight.js/issues/909#issuecomment-131686186
   Vue.nextTick(() => {
     const blocks = document.querySelectorAll('pre code:not(.hljs)');
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);

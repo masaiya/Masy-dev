@@ -43,6 +43,8 @@
       <p>Written by <a href="https://github.com/masaiya">Masy</a></p>
       <p>Part of <a href="https://github.com/masaiya/Masy-dev">Masy-dev</a></p>
     </footer>
+    
+    <m-button>啦啦啦啦</m-button>
   </div>
 </template>
 

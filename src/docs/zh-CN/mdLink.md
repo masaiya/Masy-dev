@@ -43,18 +43,6 @@
 ```
 :::
 
-<script>
-  import mLink from "../../components/subGroup/mLink.vue"
-  export default {
-    data() {
-      return {
-      };
-    },
-    components: {
-      mLink
-    }
-  };
-</script>
 
 ### Attributes
 

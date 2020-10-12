@@ -14,13 +14,15 @@ import navsData from "./nav.config.json"
 import mHeader from "./components/mHeader"
 import mSide from "./components/mSide"
 
-
+import mButton from "./components/subGroup/mButton"
 
 export default {
   name: 'App',
   components: {
     mHeader,
-    mSide
+    mSide,
+
+    mButton
   },
   data() {
     return {

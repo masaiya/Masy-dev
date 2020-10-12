@@ -96,15 +96,6 @@ Button 组件提供除了默认值以外的两种尺寸，可以在不同场景�
 </div>
 ```
 :::
-
-<script> 
-  import mButton from "../../components/subGroup/mButton.vue"
-  export default {
-    components: {
-      mButton
-    }
-  };
-</script>
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |

@@ -23,10 +23,16 @@
 </template>
 
 <script>
+import { stripScript, stripStyle, stripTemplate } from '../util.js';
 export default {
   name: 'demo-block',
   data() {
     return {
+      codepen: {
+        script: '',
+        html: '',
+        style: ''
+      },
       hovering: false,
       isExpanded: false
     };
@@ -71,8 +77,7 @@ export default {
       }, 200);
     }
   },
-
-    created() {
+  created() {
       const highlight = this.$slots.highlight;
       if (highlight && highlight[0]) {
         let code = '';
