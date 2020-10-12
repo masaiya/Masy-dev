@@ -30,14 +30,14 @@
 :::demo 只要在`m-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <div>
-  <m-radio disabled v-model="radio1" label="1">备选项1</m-radio>
-  <m-radio disabled v-model="radio1" label="2">备选项2</m-radio>
+  <m-radio disabled v-model="radio" label="1">备选项1</m-radio>
+  <m-radio disabled v-model="radio" label="2">备选项2</m-radio>
 </div>
 <script>
   export default {
     data() {
       return {
-        radio1: '1'
+        radio: '1'
       }
     }
   };

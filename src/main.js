@@ -11,6 +11,7 @@ import components from "../components.json";
 Vue.config.productionTip = false
 
 import demoBlock from "./components/demo-block"
+Vue.component('demo-block', demoBlock);
 
 import mButton from "./components/subGroup/mButton.vue"
 Vue.component('mButton', mButton);
@@ -25,7 +26,9 @@ Vue.component('mLink', mLink);
 import mDropDown from "./components/subGroup/mDropDown.vue"
 Vue.component('mDropDown', mDropDown);
 
-Vue.component('demo-block', demoBlock);
+
+
+
 
 router.afterEach(route => {
   Vue.nextTick(() => {
