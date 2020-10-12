@@ -1,17 +1,21 @@
 <template>
-  <div class="mInput" :class="[type === 'text' ? 'm-text':'m-textarea']">
-    <template v-if="type === 'text'">
-      <input type="text" class="m-input-inner" :placeholder="placeholder">
+  <div class="mInput" :class="[type === 'text' ? 'm-text':'m-textarea', {'m-disabled': disabled, 'm-input-next': clearable}]">
+    <template v-if="type !== 'textarea'">
+      <input :type="passwordVisible ? 'password': 'text'" class="m-input-inner" :placeholder="placeholder" v-model="inputValue" :readonly="disabled">
+      <i class="m-input__icon m-icon-circle-close m-input__clear" v-if="isClearShow" @click="clearInput" @mousedown.prevent></i>
+      <i class="m-input__icon m-icon-view m-input__clear" v-if="isPasswordShow" @click="showPassword"></i>
+      </span>
     </template>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'mInput',
   data() {
     return {
+      inputValue: this.value,
+      passwordVisible: this.password
     };
   },
   props: {
@@ -19,13 +23,39 @@ export default {
       type: String,
       default: 'text'
     },
-    placeholder: String
+    placeholder: String,
+    value: '',
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    password: {
+      type: Boolean,
+      default: false
+    }
   },
   computed:{
+    isClearShow() {
+      return this.clearable && this.inputValue.trim();
+    },
+    isPasswordShow() {
+      return this.password && this.inputValue.trim();
+    }
   },
   watch:{
   },
-  methods: {},
+  methods: {
+    clearInput() {
+      this.inputValue = ''
+    },
+    showPassword() {
+      this.passwordVisible = !this.passwordVisible;
+    }
+  },
 };
 </script>
 
@@ -55,4 +85,33 @@ export default {
     }
   }
 }
+.m-disabled {
+  .m-input-inner {
+    background-color: #F5F7FA;
+    border-color: #E4E7ED;
+    color: #C0C4CC;
+    cursor: not-allowed;
+    &:focus, &:hover {
+      border-color: #E4E7ED;
+    }
+  }
+}
+.m-input-next {
+  .m-input-inner {
+    padding-right: 30px;
+  }
+}
+.m-input__clear {
+  color: #C0C4CC;
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-transition: color .2s cubic-bezier(.645, .045, .355, 1);
+  transition: color .2s cubic-bezier(.645, .045, .355, 1);
+  position: relative;
+  left: -30px;
+  &:hover {
+    color: #909399;
+  }
+}
+
 </style>

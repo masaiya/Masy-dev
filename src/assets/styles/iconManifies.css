@@ -1,0 +1,12 @@
+.m-input__icon {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  line-height: 40px
+}
+.m-icon-circle-close {
+  width: 20px;
+  height: 20px;
+}
