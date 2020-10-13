@@ -72,6 +72,11 @@ export default new Router({
       component: markdown.mdCascader
     },
     {
+      path: '/progress',
+      name: 'progress',
+      component: markdown.mdProgress
+    },
+    {
       path: '/dropDown',
       name: 'dropDown',
       component: markdown.mdDropDown

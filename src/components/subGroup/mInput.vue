@@ -1,7 +1,7 @@
 <template>
-  <div class="mInput" :class="[type === 'textarea' ? 'm-textarea':'m-text', {'m-disabled': disabled, 'm-input-next': clearable}]" @click="handleClick" @blur="handleBlur">
+  <div class="mInput" :class="[type === 'textarea' ? 'm-textarea':'m-text', {'m-disabled': disabled, 'm-input-next': clearable}]" @click="handleClick">
     <template v-if="type !== 'textarea'">
-      <input :type="passwordVisible ? 'password': 'text'" class="m-input-inner" :placeholder="placeholder" v-model="inputValue" :readonly="disabled || readonly">
+      <input :type="passwordVisible ? 'password': 'text'" class="m-input-inner" :placeholder="placeholder" v-model="inputValue" :readonly="disabled || readonly" @blur="handleBlur">
       <i class="m-input__icon m-icon-circle-close m-input__clear" v-if="isClearShow" @click="clearInput" @mousedown.prevent></i>
       <i class="m-input__icon m-icon-view m-input__clear" v-if="isPasswordShow" @click="showPassword"></i>
       </span>

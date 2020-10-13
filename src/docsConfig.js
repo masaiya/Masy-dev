@@ -6,6 +6,7 @@ import mdRadio from './docs/zh-CN/mdRadio.md'
 import mdInput from './docs/zh-CN/mdInput.md'
 import mdSelect from './docs/zh-CN/mdSelect.md'
 import mdCascader from './docs/zh-CN/mdCascader.md'
+import mdProgress from './docs/zh-CN/mdProgress.md'
 
 const markdown = {
   mdDialog, 
@@ -15,7 +16,8 @@ const markdown = {
   mdRadio,
   mdInput,
   mdSelect,
-  mdCascader
+  mdCascader,
+  mdProgress
 }
 
 export default markdown;

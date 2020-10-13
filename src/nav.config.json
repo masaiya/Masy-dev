@@ -53,6 +53,10 @@
           "name": "Cascader 级联选择器"
         },
         {
+          "path": "/progress",
+          "name": "Progress 进度条"
+        },
+        {
           "path": "/dropDown",
           "name": "DropDown 下拉"
         }

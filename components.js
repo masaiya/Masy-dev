@@ -6,7 +6,8 @@ import mInput from "./src/components/subGroup/mInput.vue";
 import mLink from "./src/components/subGroup/mLink.vue";
 import mRadio from "./src/components/subGroup/mRadio.vue";
 import mCascader from "./src/components/subGroup/mCascader.vue";
-import mSelect from "./src/components/subGroup/mSelect.vue"
+import mSelect from "./src/components/subGroup/mSelect.vue";
+import mProgress from "./src/components/subGroup/mProgress.vue"
 
 export default {
   demoBlock,
@@ -17,5 +18,6 @@ export default {
   mLink,
   mRadio,
   mCascader,
-  mSelect
+  mSelect,
+  mProgress
 };
