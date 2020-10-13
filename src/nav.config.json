@@ -45,6 +45,14 @@
           "name": "Input 输入框"
         },
         {
+          "path": "/select",
+          "name": "Select 选择器"
+        },
+        {
+          "path": "/cascader",
+          "name": "Cascader 级联选择器"
+        },
+        {
           "path": "/dropDown",
           "name": "DropDown 下拉"
         }

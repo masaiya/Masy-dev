@@ -90,13 +90,7 @@ export default {
 
 :::demo 文本域高度可通过 `rows` 属性控制
 ```html
-<el-input
-  type="textarea"
-  :rows="2"
-  placeholder="请输入内容"
-  v-model="textarea">
-</el-input>
-
+<m-input type="textarea" :cols="60" placeholder="请输入内容" v-model="textarea"></m-input>
 <script>
 export default {
   data() {
@@ -108,3 +102,14 @@ export default {
 </script>
 ```
 :::
+
+### Input Attributes
+
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| type          | 类型   | string  | text，textarea 和其他 [原生 input 的 type 值] |text
+| value / v-model | 绑定值           | string / number  | — | — |
+| placeholder   | 输入框占位文本    | string          | — | — |
+| clearable     | 是否可清空        | boolean         | — | false |
+| password      | 是否显示切换密码图标| boolean         | — | false |
+| disabled      | 禁用            | boolean         | — | false   |

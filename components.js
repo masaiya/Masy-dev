@@ -5,6 +5,8 @@ import mDropDown from "./src/components/subGroup/mDropDown.vue";
 import mInput from "./src/components/subGroup/mInput.vue";
 import mLink from "./src/components/subGroup/mLink.vue";
 import mRadio from "./src/components/subGroup/mRadio.vue";
+import mCascader from "./src/components/subGroup/mCascader.vue";
+import mSelect from "./src/components/subGroup/mSelect.vue"
 
 export default {
   demoBlock,
@@ -13,5 +15,7 @@ export default {
   mDropDown,
   mInput,
   mLink,
-  mRadio
+  mRadio,
+  mCascader,
+  mSelect
 };

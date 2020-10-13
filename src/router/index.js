@@ -62,6 +62,16 @@ export default new Router({
       component: markdown.mdInput
     },
     {
+      path: '/select',
+      name: 'select',
+      component: markdown.mdSelect
+    },
+    {
+      path: '/cascader',
+      name: 'cascader',
+      component: markdown.mdCascader
+    },
+    {
       path: '/dropDown',
       name: 'dropDown',
       component: markdown.mdDropDown
