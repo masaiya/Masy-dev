@@ -1,16 +1,21 @@
 <template>
   <div class="mProgress" :class="['m-progress-'+type, status ? 'is-'+status : '']">
-    <div class="m-progress-bar">
-      <div class="m-progress-outer" :style="strokeHeight">
-        <div class="m-progress-inner" :style="innerWidthStyle">
-          <div class="m-progree-innerText" v-if="textInside">{{percentage+"%"}}</div>
+    <template v-if="type === 'line'">
+      <div class="m-progress-bar">
+        <div class="m-progress-outer" :style="strokeHeight">
+          <div class="m-progress-inner" :style="innerWidthStyle">
+            <div class="m-progree-innerText" v-if="textInside">{{percentage+"%"}}</div>
+          </div>
+        </div>
+        <div class="m-progress-text" v-if="!textInside">
+          <template v-if="!status">{{percentage+"%"}}</template>
+          <i v-else :class="iconClass"></i>
         </div>
       </div>
-      <div class="m-progress-text" v-if="!textInside">
-        <template v-if="!status">{{percentage+"%"}}</template>
-        <i v-else :class="iconClass"></i>
-      </div>
-    </div>
+    </template>
+    <template v-if="type === 'circle'">
+      
+    </template>
   </div>
 </template>
 
@@ -24,7 +29,8 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'line'
+      default: 'line',
+      validator: val => ['line', 'circle'].indexOf(val) > -1
     },
     percentage: {
       type: Number,
@@ -35,6 +41,10 @@ export default {
     status: {
       type: String,
       validator: val => ['success', 'exception', 'warning'].indexOf(val) > -1
+    },
+    color: {
+      type: String,
+      default: ''
     },
     height: {
       type: Number,
@@ -47,8 +57,27 @@ export default {
   },
   computed:{
     innerWidthStyle() {
-      const style = {};
+      let style = {};
+      let temp;
       style.width = this.percentage + '%';
+      style.height = this.height + 'px';
+      if(this.color) {
+        style.backgroundColor = this.color;
+      } else {
+        switch(this.status) {
+          case 'success': 
+            style.backgroundColor = '#67C23A';
+            break;
+          case 'exception':
+            style.backgroundColor = '#F56C6C';
+            break;
+          case 'warning':
+            style.backgroundColor = '#E6A23C';
+            break;
+          default: 
+            style.backgroundColor = '#409eff';
+        }
+      }
       return style;
     },
     iconClass() {
@@ -60,19 +89,20 @@ export default {
         return 'm-icon-circle-close';
     },
     strokeHeight() {
-      const style = {};
+      let style = {};
       style.height = this.height + 'px';
       return style;
     }
   },
   watch:{
   },
-  methods: {},
+  methods: {    
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.mProgress {
+.m-progress-line {
   position: relative;
   line-height: 1;
   .m-progress-bar {
@@ -91,7 +121,6 @@ export default {
         top: 0;
         height: 100%;
         border-radius: 100px;
-        line-height: 1;
         transition: width .6s ease;
         box-sizing: border-box;
         .m-progree-innerText {
@@ -109,15 +138,14 @@ export default {
   }
   .m-progress-text {
     width: 40px;
+    height: 100%;
     font-size: 14px;
-    color: #fff;
-    display: inline-block;
+    color: #606266;
+    display: block;
     line-height: 1;
-    float: right;
-    position: relative;
+    position: absolute;
     right: -40px;
-    top: -10px;
-    text-align: left;
+    top: -3px;
   }
 }
 .m-progress-line {
@@ -125,29 +153,17 @@ export default {
   width: 350px;
   display: block;
 }
-.m-progress-inner {
-  background-color: #409eff;
-}
 .mProgress.is-success {
-  .m-progress-inner {
-    background-color: #67C23A;
-  }
   .m-progress-text {
     color: #67C23A;
   }
 }
 .mProgress.is-warning {
-  .m-progress-inner {
-    background-color: #E6A23C;
-  }
   .m-progress-text {
     color: #E6A23C;
   }
 }
 .mProgress.is-exception {
-  .m-progress-inner {
-    background-color: #F56C6C;
-  }
   .m-progress-text {
     color: #F56C6C;
   }

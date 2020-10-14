@@ -26,3 +26,67 @@
 <m-progress :text-inside="true" :height="20" :percentage="50" status="exception"></m-progress>
 ```
 :::
+
+### 自定义颜色
+
+可以通过 `color` 设置进度条的颜色，`color` 可以接受颜色字符串，函数和数组。
+
+:::demo
+
+```html
+<m-progress :percentage="percentage" :color="customColor"></m-progress>
+<m-progress :percentage="percentage" :color="customColorMethod()"></m-progress>
+<div>
+  <m-button icon="el-icon-minus" @click="decrease"> - </m-button>
+  <m-button icon="el-icon-plus" @click="increase"> + </m-button>
+</div>
+
+<script>
+export default {
+  data() {
+    return {
+      customColor: '#EEB4B4',
+      percentage: 10
+    }
+  },
+  methods: {
+    customColorMethod(percentage) {
+      if(this.percentage < 20) {
+        return '#BBFFFF';
+      } else if(this.percentage < 50) {
+        return '#96CDCD';
+      } else if(this.percentage < 70){
+        return '#668B8B';
+      } else if(this.percentage < 90){
+        return '#1E90FF';
+      } else return '#123456';
+    },
+    increase() {
+      this.percentage += 10;
+      if(this.percentage >= 100) 
+        this.percentage = 100;
+    },
+    decrease() {
+      this.percentage -= 10;
+      if(this.percentage <= 0) 
+        this.percentage = 0;
+    }
+  }
+}
+</script>
+```
+:::
+### 环形进度条
+
+Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形进度条中，还可以通过 `width` 属性来设置其大小。
+
+:::demo
+
+```html
+<m-progress type="circle" :percentage="0"></m-progress>
+<m-progress type="circle" :percentage="25"></m-progress>
+<m-progress type="circle" :percentage="100" status="success"></m-progress>
+<m-progress type="circle" :percentage="70" status="warning"></m-progress>
+<m-progress type="circle" :percentage="50" status="exception"></m-progress>
+```
+:::
