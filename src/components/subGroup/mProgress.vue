@@ -13,14 +13,18 @@
         </div>
       </div>
     </template>
-    <template v-if="type === 'circle'">
+    <template v-else>
       <div class="m-progress-circle" :style="circleStyle">
         <svg viewBox="0 0 100 100">
           <path stroke="#e5e9f2" :stroke-width="strokeWidth" :d="track" fill="none" :style="trailPathStyle">
           </path>
-          <path :stroke="circleColor" :stroke-width="percentage ? strokeWidth : '0'" :d="track" fill="none" :style="circlePathStyle">
+          <path :stroke="circleColor" :stroke-width="percentage ? strokeWidth : 0" :d="track" fill="none" :style="circlePathStyle" :stroke-linecap="strokeLinecap">
           </path>
         </svg>
+        <div class="m-progress-circleText">
+          <template v-if="!status">{{percentage+"%"}}</template>
+          <i v-else :class="iconClass"></i>
+        </div>
       </div>
     </template>
   </div>
@@ -37,13 +41,17 @@ export default {
     type: {
       type: String,
       default: 'line',
-      validator: val => ['line', 'circle'].indexOf(val) > -1
+      validator: val => ['line', 'circle', 'dashboard'].indexOf(val) > -1
     },
     percentage: {
       type: Number,
       default: 0,
       required: true,
       validator: val => val >= 0 && val <= 100
+    },
+    strokeLinecap: {
+      type: String,
+      default: 'round'
     },
     status: {
       type: String,
@@ -135,32 +143,43 @@ export default {
       return (this.height / this.circleSize * 100).toFixed(1);
     },
     radius() {
-      if(this.type === 'circle') 
+      if (this.type === 'circle' || this.type === 'dashboard') {
         return parseInt(50 - parseFloat(this.strokeWidth) / 2, 10);
-      else 
+      } else {
         return 0;
+      }
     },
     track() {
-      const radiu = this.radius;
+      const radius = this.radius;
+      const isDashboard = this.type === 'dashboard';
       return `
         M 50 50
-        m 0 -${radiu}
-        a ${radiu} ${radiu} 0 1 1 0 ${radiu * 2}
-        a ${radiu} ${radiu} 0 1 1 0 -${radiu *2}
+        m 0 ${isDashboard ? '' : '-'}${radius}
+        a ${radius} ${radius} 0 1 1 0 ${isDashboard ? '-' : ''}${radius * 2}
+        a ${radius} ${radius} 0 1 1 0 ${isDashboard ? '' : '-'}${radius * 2}
       `;
+    },
+    rate() {
+      return this.type === 'dashboard' ? 0.75 : 1;
+    },
+    strokeDashoffset() {
+      const offset = -1 * this.perimeter * (1 - this.rate) / 2;
+      return `${offset}px`;
     },
     perimeter() {
       return 2 * Math.PI * this.radius;
     },
     trailPathStyle() {
       return {
-        strokeDasharray: `${this.perimeter}px, ${this.perimeter}px`,
+        strokeDasharray: `${this.perimeter * this.rate}px, ${this.perimeter}px`,
+        strokeDashoffset: this.strokeDashoffset
       };
     },
     circlePathStyle() {
       return {
-        strokeDasharray: `${this.perimeter * (this.percentage / 100) }px, ${this.perimeter}px`,
-        transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease'
+        strokeDasharray: `${this.perimeter * this.rate * (this.percentage / 100) }px, ${this.perimeter}px`,
+        transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease',
+        strokeDashoffset: this.strokeDashoffset
       };
     }
   }
@@ -236,5 +255,17 @@ export default {
 }
 .m-progress-circle {
   display: inline-block;
+  position: relative;
+}
+.m-progress-circleText {
+  font-size: 14px;
+  color: #606266;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
 }
 </style>

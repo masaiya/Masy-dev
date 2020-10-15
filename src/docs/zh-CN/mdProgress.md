@@ -37,8 +37,8 @@
 <m-progress :percentage="percentage" :color="customColor"></m-progress>
 <m-progress :percentage="percentage" :color="customColorMethod()"></m-progress>
 <div>
-  <m-button icon="el-icon-minus" @click="decrease"> - </m-button>
-  <m-button icon="el-icon-plus" @click="increase"> + </m-button>
+  <m-button icon="m-icon-minus" @click="decrease"> - </m-button>
+  <m-button icon="m-icon-plus" @click="increase"> + </m-button>
 </div>
 
 <script>
@@ -90,3 +90,52 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 <m-progress type="circle" :percentage="50" status="exception"></m-progress>
 ```
 :::
+
+### 仪表盘行进度条
+
+通过 `type` 属性来指定使用仪表盘形进度条。
+
+:::demo 
+```html
+<m-progress type="dashboard" :percentage="percentage"></m-progress>
+<div>
+  <m-button @click="decrease"> - </m-button>
+  <m-button @click="increase"> + </m-button>
+</div>
+
+<script>
+export default {
+  data() {
+    return {
+      percentage: 10
+    }
+  },
+  methods: {
+    increase() {
+      this.percentage += 10;
+      if(this.percentage >= 100) 
+        this.percentage = 100;
+    },
+    decrease() {
+      this.percentage -= 10;
+      if(this.percentage <= 0)
+        this.percentage = 0;
+    }
+  }
+}
+</script>
+```
+:::
+
+### Attributes
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| **percentage** | **百分比（必填）**   | number         |     0-100          |     0    |
+| type          | 进度条类型           | string         | line/circle/dashboard | line |
+| stroke-width  | 进度条的宽度，单位 px | number          | — | 6 |
+| text-inside  | 进度条显示文字内置在进度条内（只在 type=line 时可用） | boolean | — | false |
+| status  | 进度条当前状态 | string | success/exception/warning | — |
+| color  | 进度条背景色（会覆盖 status 状态颜色） | string/function/array | — | '' |
+| width  | 环形进度条画布宽度（只在 type 为 circle 或 dashboard 时可用） | number |  | 126 |
+| show-text  | 是否显示进度条文字内容 | boolean | — | true |
+| stroke-linecap  | circle/dashboard 类型路径两端的形状 | string | butt/round/square | round |

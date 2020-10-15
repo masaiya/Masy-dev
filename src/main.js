@@ -3,9 +3,9 @@ import App from './App.vue';
 import router from './router';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
+import "../src/assets/styles/iconManifies.css"
 import "../src/assets/styles/common.css"
 import "../src/assets/styles/icon.css"
-import "../src/assets/styles/iconManifies.css"
 
 import components from "../components";
 

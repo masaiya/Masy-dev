@@ -1,12 +1,9 @@
-.m-input__icon {
-  height: 100%;
-  width: 25px;
-  text-align: center;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-  line-height: 40px
+.m-icon-warning {
+  color: #E6A23C;
+}
+.m-icon-circle-check {
+  color: #67C23A;
 }
 .m-icon-circle-close {
-  width: 20px;
-  height: 20px;
+  color: #F56C6C;
 }
