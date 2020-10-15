@@ -13,6 +13,9 @@ p {
   color: #5e6d82;
   line-height: 1.5em;
 }
+ul {
+  list-style: none;
+}
 .tip {
   padding: 8px 16px;
   background-color: #ECF8FF;
