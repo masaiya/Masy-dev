@@ -14,7 +14,14 @@
       </div>
     </template>
     <template v-if="type === 'circle'">
-      
+      <div class="m-progress-circle" :style="circleStyle">
+        <svg viewBox="0 0 100 100">
+          <path stroke="#e5e9f2" :stroke-width="strokeWidth" :d="track" fill="none" :style="trailPathStyle">
+          </path>
+          <path :stroke="circleColor" :stroke-width="percentage ? strokeWidth : '0'" :d="track" fill="none" :style="circlePathStyle">
+          </path>
+        </svg>
+      </div>
     </template>
   </div>
 </template>
@@ -41,6 +48,10 @@ export default {
     status: {
       type: String,
       validator: val => ['success', 'exception', 'warning'].indexOf(val) > -1
+    },
+    circleSize: {
+      type: Number,
+      default: 126
     },
     color: {
       type: String,
@@ -80,6 +91,33 @@ export default {
       }
       return style;
     },
+    circleColor () {
+      let color; 
+      if(this.color) {
+        color = this.color;
+      } else {
+        switch(this.status) {
+          case 'success': 
+            color = '#67C23A';
+            break;
+          case 'exception':
+            color = '#F56C6C';
+            break;
+          case 'warning':
+            color = '#E6A23C';
+            break;
+          default: 
+            color = '#409eff';
+        }
+      }
+      return color;
+    },
+    circleStyle() {
+      let style = {};
+      style.width = this.circleSize + 'px';
+      style.height = this.circleSize + 'px';
+      return style;
+    },
     iconClass() {
       if(this.status === 'warning') 
         return 'm-icon-warning';
@@ -92,11 +130,39 @@ export default {
       let style = {};
       style.height = this.height + 'px';
       return style;
+    },
+    strokeWidth() {
+      return (this.height / this.circleSize * 100).toFixed(1);
+    },
+    radius() {
+      if(this.type === 'circle') 
+        return parseInt(50 - parseFloat(this.strokeWidth) / 2, 10);
+      else 
+        return 0;
+    },
+    track() {
+      const radiu = this.radius;
+      return `
+        M 50 50
+        m 0 -${radiu}
+        a ${radiu} ${radiu} 0 1 1 0 ${radiu * 2}
+        a ${radiu} ${radiu} 0 1 1 0 -${radiu *2}
+      `;
+    },
+    perimeter() {
+      return 2 * Math.PI * this.radius;
+    },
+    trailPathStyle() {
+      return {
+        strokeDasharray: `${this.perimeter}px, ${this.perimeter}px`,
+      };
+    },
+    circlePathStyle() {
+      return {
+        strokeDasharray: `${this.perimeter * (this.percentage / 100) }px, ${this.perimeter}px`,
+        transition: 'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease'
+      };
     }
-  },
-  watch:{
-  },
-  methods: {    
   }
 };
 </script>
@@ -167,5 +233,8 @@ export default {
   .m-progress-text {
     color: #F56C6C;
   }
+}
+.m-progress-circle {
+  display: inline-block;
 }
 </style>

@@ -4,7 +4,7 @@
     <svg width="250" height="250" class="svgPic">
       <circle cx="100" cy="100" r="100" transform="translate(30,30)"></circle>
       <polygon :points="getPoints()" transform="translate(30,30)"/>
-      <text v-for="(stat, index) in stats" :key="index" :x="valueToPoint(stat.value, index, stats.length).x + 32" :y="valueToPoint(stat.value, index, stats.length).y + 32" v-model="stats"> {{stat.label}} </text>
+      <text v-for="(stat, index) in stats" :key="index" :x="valueToPoint(stat.value, index, stats.length).x + 32" :y="valueToPoint(stat.value, index, stats.length).y + 32"> {{stat.label}} </text>
     </svg>
     <div class="dataShow" v-for="(stat, index) in stats" :key="index">
       <label class="label">{{ stat.label }}</label>
