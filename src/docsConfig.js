@@ -7,6 +7,7 @@ import mdInput from './docs/zh-CN/mdInput.md'
 import mdSelect from './docs/zh-CN/mdSelect.md'
 import mdCascader from './docs/zh-CN/mdCascader.md'
 import mdProgress from './docs/zh-CN/mdProgress.md'
+import mdPagination from './docs/zh-CN/mdPagination.md'
 
 const markdown = {
   mdDialog, 
@@ -17,7 +18,8 @@ const markdown = {
   mdInput,
   mdSelect,
   mdCascader,
-  mdProgress
+  mdProgress,
+  mdPagination
 }
 
 export default markdown;

@@ -9,7 +9,9 @@ import mLink from "./src/components/subGroup/mLink.vue";
 import mRadio from "./src/components/subGroup/mRadio.vue";
 import mCascader from "./src/components/subGroup/mCascader.vue";
 import mSelect from "./src/components/subGroup/mSelect.vue";
-import mProgress from "./src/components/subGroup/mProgress.vue"
+import mProgress from "./src/components/subGroup/mProgress.vue";
+import mPagination from "./src/components/subGroup/mPagination/mPagination.js"
+import mPager from "./src/components/subGroup/mPagination/mPager.vue"
 
 export default {
   demoBlock,
@@ -23,5 +25,7 @@ export default {
   mRadio,
   mCascader,
   mSelect,
-  mProgress
+  mProgress,
+  mPagination,
+  mPager
 };

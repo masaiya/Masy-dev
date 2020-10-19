@@ -80,6 +80,10 @@ export default new Router({
       path: '/dropDown',
       name: 'dropDown',
       component: markdown.mdDropDown
+    }, {
+      path: '/pagination',
+      name: 'pagination',
+      component: markdown.mdPagination
     }
   ]
 })

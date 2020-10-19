@@ -57,8 +57,12 @@
           "name": "Progress 进度条"
         },
         {
-          "path": "/dropDown",
-          "name": "DropDown 下拉"
+          "path": "/dropdown",
+          "name": "Dropdown 下拉"
+        },
+        {
+          "path": "/pagination",
+          "name": "Pagonation 分页"
         }
       ]
     }

@@ -9,6 +9,7 @@ import "../src/assets/styles/icon.css"
 
 import components from "../components";
 
+
 Vue.config.productionTip = false
 
 for(let i in components) {
@@ -21,9 +22,11 @@ router.afterEach(route => {
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
 });
+import store from "./store/store"
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
